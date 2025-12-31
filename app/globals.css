@@ -1,27 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5F5F5;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --border: #E0E0E0;
+  --secondary: #666666;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Space Grotesk', 'Pretendard', sans-serif;
+  min-height: 100vh;
+}
+
+/* Mood Themes */
+.mood-calm {
+  --mood-bg: #f1f5f9;
+  --mood-accent: #64748b;
+}
+
+.mood-energetic {
+  --mood-bg: #fffbeb;
+  --mood-accent: #d97706;
+}
+
+.mood-melancholy {
+  --mood-bg: #eff6ff;
+  --mood-accent: #2563eb;
+}
+
+.mood-romantic {
+  --mood-bg: #fff1f2;
+  --mood-accent: #e11d48;
+}
+
+.mood-dark {
+  --mood-bg: #e4e4e7;
+  --mood-accent: #3f3f46;
+}
+
+.mood-uplifting {
+  --mood-bg: #fefce8;
+  --mood-accent: #ca8a04;
+}
+
+/* Turntable Styles */
+.turntable-base {
+  background: linear-gradient(145deg, #d4d4d4 0%, #a3a3a3 50%, #c0c0c0 100%);
+}
+
+.lp-disc {
+  background: radial-gradient(
+    circle at center,
+    #1a1a1a 0%,
+    #1a1a1a 35%,
+    #2a2a2a 36%,
+    #1a1a1a 37%,
+    #1a1a1a 45%,
+    #2a2a2a 46%,
+    #1a1a1a 47%,
+    #1a1a1a 55%,
+    #2a2a2a 56%,
+    #1a1a1a 57%,
+    #1a1a1a 100%
+  );
+}
+
+.lp-label {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Transitions */
+.transition-mood {
+  transition: background-color 0.5s ease-out;
+}
+
+/* Equalizer Slider */
+input[type="range"].eq-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].eq-slider::-webkit-slider-runnable-track {
+  background: #e5e5e5;
+  height: 4px;
+  border-radius: 2px;
+}
+
+input[type="range"].eq-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  background-color: #1a1a1a;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"].eq-slider::-moz-range-track {
+  background: #e5e5e5;
+  height: 4px;
+  border-radius: 2px;
+}
+
+input[type="range"].eq-slider::-moz-range-thumb {
+  background-color: #1a1a1a;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }
