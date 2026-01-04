@@ -150,7 +150,6 @@ export default function AudioPlayer() {
       onTimeUpdate={handleTimeUpdate}
       onEnded={handleEnded}
       preload="auto"
-      crossOrigin="anonymous"
     />
   );
 }
