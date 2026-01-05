@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { usePlayerStore } from '@/stores/playerStore';
-import { moodTheme } from '@/constants/theme';
 
 // Generate fake waveform data
 const generateWaveform = (length: number): number[] => {
