@@ -13,7 +13,7 @@ export default function HomeView() {
   const [featuredTracks, setFeaturedTracks] = useState<Song[]>([]);
   const [categoryTracks, setCategoryTracks] = useState<Record<string, Song[]>>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState('new');
+  const [activeCategory, setActiveCategory] = useState('kpop');
 
   // Fetch featured tracks
   useEffect(() => {

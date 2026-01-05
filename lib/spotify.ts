@@ -159,14 +159,18 @@ export async function getNewReleases(limit = 10): Promise<SpotifyTrack[]> {
 // Search by category/genre
 export async function searchByCategory(category: string, limit = 6): Promise<SpotifyTrack[]> {
   const categoryQueries: Record<string, string> = {
-    classic: 'genre:classical year:1900-1990',
-    '90s': 'year:1990-1999',
-    new: 'year:2023-2024',
-    jazz: 'genre:jazz',
-    indie: 'genre:indie',
-    kpop: 'genre:k-pop',
-    hiphop: 'genre:hip-hop',
-    rock: 'genre:rock',
+    kpop: 'kpop 2024',
+    pop: 'pop hits 2024',
+    hiphop: 'hip hop hits',
+    rnb: 'r&b soul',
+    rock: 'rock hits',
+    indie: 'indie pop',
+    jazz: 'jazz',
+    edm: 'edm dance',
+    lofi: 'lofi hip hop',
+    classic: 'classical music',
+    ballad: 'korean ballad',
+    acoustic: 'acoustic covers',
   };
 
   const query = categoryQueries[category] || category;

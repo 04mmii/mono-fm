@@ -34,9 +34,16 @@ export const moodTheme: Record<Mood, { bg: string; accent: string; gradient: str
 };
 
 export const categories = [
-  { id: 'classic', label: 'Classic' },
-  { id: '90s', label: '90s' },
-  { id: 'new', label: 'New' },
-  { id: 'jazz', label: 'Jazz' },
+  { id: 'kpop', label: 'K-Pop' },
+  { id: 'pop', label: 'Pop' },
+  { id: 'hiphop', label: 'Hip-Hop' },
+  { id: 'rnb', label: 'R&B' },
+  { id: 'rock', label: 'Rock' },
   { id: 'indie', label: 'Indie' },
+  { id: 'jazz', label: 'Jazz' },
+  { id: 'edm', label: 'EDM' },
+  { id: 'lofi', label: 'Lo-Fi' },
+  { id: 'classic', label: 'Classic' },
+  { id: 'ballad', label: 'Ballad' },
+  { id: 'acoustic', label: 'Acoustic' },
 ];
