@@ -1,6 +1,6 @@
 // Free sample audio URLs for demo purposes
 // These are royalty-free music samples
-export const sampleAudioUrls = [
+const rawSampleAudioUrls = [
   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
@@ -11,6 +11,8 @@ export const sampleAudioUrls = [
   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
 ];
 
+// Proxy through our API to avoid CORS issues
 export const getRandomSampleAudio = (index: number): string => {
-  return sampleAudioUrls[index % sampleAudioUrls.length];
+  const rawUrl = rawSampleAudioUrls[index % rawSampleAudioUrls.length];
+  return `/api/audio-proxy?url=${encodeURIComponent(rawUrl)}`;
 };
