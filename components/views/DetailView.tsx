@@ -1,22 +1,39 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ArrowLeft, ExternalLink, Clock, Plus, Check, ListPlus, X, Heart } from 'lucide-react';
-import { usePlayerStore } from '@/stores/playerStore';
-import { useUIStore } from '@/stores/uiStore';
-import { useLibraryStore } from '@/stores/libraryStore';
-import { moodTheme } from '@/constants/theme';
-import Turntable from '@/components/player/Turntable';
-import NowPlaying from '@/components/player/NowPlaying';
-import WaveForm from '@/components/player/WaveForm';
-import Controls from '@/components/player/Controls';
+import { useState } from "react";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Clock,
+  Plus,
+  Check,
+  ListPlus,
+  X,
+  Heart,
+} from "lucide-react";
+import { usePlayerStore } from "@/stores/playerStore";
+import { useUIStore } from "@/stores/uiStore";
+import { useLibraryStore } from "@/stores/libraryStore";
+import { moodTheme } from "@/constants/theme";
+import Turntable from "@/components/player/Turntable";
+import NowPlaying from "@/components/player/NowPlaying";
+import WaveForm from "@/components/player/WaveForm";
+import Controls from "@/components/player/Controls";
 
 export default function DetailView() {
   const { currentTrack, currentMood } = usePlayerStore();
   const { setActiveView } = useUIStore();
-  const { playlists, addToPlaylist, favorites, addToFavorites, removeFromFavorites } = useLibraryStore();
+  const {
+    playlists,
+    addToPlaylist,
+    favorites,
+    addToFavorites,
+    removeFromFavorites,
+  } = useLibraryStore();
 
-  const isFavorite = currentTrack ? favorites.some(f => f.id === currentTrack.id) : false;
+  const isFavorite = currentTrack
+    ? favorites.some((f) => f.id === currentTrack.id)
+    : false;
 
   const toggleFavorite = () => {
     if (!currentTrack) return;
@@ -43,13 +60,15 @@ export default function DetailView() {
 
   // Generate YouTube search URL
   const getYouTubeSearchUrl = () => {
-    if (!currentTrack) return '';
-    const query = encodeURIComponent(`${currentTrack.title} ${currentTrack.artist}`);
+    if (!currentTrack) return "";
+    const query = encodeURIComponent(
+      `${currentTrack.title} ${currentTrack.artist}`
+    );
     return `https://www.youtube.com/results?search_query=${query}`;
   };
 
   const handleBack = () => {
-    setActiveView('home');
+    setActiveView("home");
   };
 
   if (!currentTrack) {
@@ -103,7 +122,7 @@ export default function DetailView() {
       </div>
 
       {/* Controls */}
-      <Controls />
+      {/* <Controls />/ */}
 
       {/* Action Buttons */}
       <div className="flex items-center gap-3 mt-4">
@@ -112,12 +131,14 @@ export default function DetailView() {
           onClick={toggleFavorite}
           className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors shadow-md ${
             isFavorite
-              ? 'bg-red-500 text-white'
-              : 'bg-white/80 backdrop-blur text-primary hover:bg-white'
+              ? "bg-red-500 text-white"
+              : "bg-white/80 backdrop-blur text-primary hover:bg-white"
           }`}
         >
-          <Heart size={18} fill={isFavorite ? 'white' : 'none'} />
-          <span className="text-sm font-medium">{isFavorite ? '좋아요' : '좋아요'}</span>
+          <Heart size={18} fill={isFavorite ? "white" : "none"} />
+          <span className="text-sm font-medium">
+            {isFavorite ? "좋아요" : "좋아요"}
+          </span>
         </button>
 
         {/* Add to Playlist Button */}
@@ -130,67 +151,82 @@ export default function DetailView() {
             <span className="text-sm font-medium">내 리스트에 추가</span>
           </button>
 
-        {/* Add to Playlist Modal */}
-        {showAddModal && (
-          <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-64 bg-white rounded-xl shadow-xl border border-border p-3 z-10">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-sm font-semibold text-primary">플레이리스트 선택</p>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="text-secondary hover:text-primary"
-              >
-                <X size={16} />
-              </button>
-            </div>
-            {playlists.length === 0 ? (
-              <p className="text-xs text-secondary text-center py-4">
-                저장된 플레이리스트가 없습니다.<br />
-                보관함에서 새로 만들어보세요!
-              </p>
-            ) : (
-              <div className="space-y-1 max-h-48 overflow-y-auto">
-                {playlists.map((pl) => (
-                  <button
-                    key={pl.id}
-                    onClick={() => handleAddToPlaylist(pl.id)}
-                    className={`w-full flex items-center gap-2 p-2 rounded-lg text-left text-sm transition-colors ${
-                      addedToPlaylist === pl.id
-                        ? 'bg-green-100 text-green-600'
-                        : 'hover:bg-gray-100'
-                    }`}
-                  >
-                    {addedToPlaylist === pl.id ? (
-                      <Check size={16} />
-                    ) : (
-                      <ListPlus size={16} className="text-secondary" />
-                    )}
-                    <span className="truncate flex-1">{pl.name}</span>
-                    <span className="text-xs text-secondary">({pl.songs.length}곡)</span>
-                  </button>
-                ))}
+          {/* Add to Playlist Modal */}
+          {showAddModal && (
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-64 bg-white rounded-xl shadow-xl border border-border p-3 z-10">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-sm font-semibold text-primary">
+                  플레이리스트 선택
+                </p>
+                <button
+                  onClick={() => setShowAddModal(false)}
+                  className="text-secondary hover:text-primary"
+                >
+                  <X size={16} />
+                </button>
               </div>
-            )}
-          </div>
-        )}
+              {playlists.length === 0 ? (
+                <p className="text-xs text-secondary text-center py-4">
+                  저장된 플레이리스트가 없습니다.
+                  <br />
+                  보관함에서 새로 만들어보세요!
+                </p>
+              ) : (
+                <div className="space-y-1 max-h-48 overflow-y-auto">
+                  {playlists.map((pl) => (
+                    <button
+                      key={pl.id}
+                      onClick={() => handleAddToPlaylist(pl.id)}
+                      className={`w-full flex items-center gap-2 p-2 rounded-lg text-left text-sm transition-colors ${
+                        addedToPlaylist === pl.id
+                          ? "bg-green-100 text-green-600"
+                          : "hover:bg-gray-100"
+                      }`}
+                    >
+                      {addedToPlaylist === pl.id ? (
+                        <Check size={16} />
+                      ) : (
+                        <ListPlus size={16} className="text-secondary" />
+                      )}
+                      <span className="truncate flex-1">{pl.name}</span>
+                      <span className="text-xs text-secondary">
+                        ({pl.songs.length}곡)
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
       {/* Song Details - Below Controls */}
       <div className="w-full max-w-md mt-6 md:mt-8 p-3 md:p-4 bg-white/80 backdrop-blur rounded-xl">
-        <h3 className="text-sm font-semibold text-primary mb-2 md:mb-3">곡 정보</h3>
+        <h3 className="text-sm font-semibold text-primary mb-2 md:mb-3">
+          곡 정보
+        </h3>
         <div className="grid grid-cols-2 gap-3 md:gap-4 text-sm">
           <div>
             <p className="text-secondary mb-1 text-xs md:text-sm">BPM</p>
-            <p className="font-bold text-primary text-sm md:text-base">{currentTrack.bpm || '-'}</p>
+            <p className="font-bold text-primary text-sm md:text-base">
+              {currentTrack.bpm || "-"}
+            </p>
           </div>
           <div>
             <p className="text-secondary mb-1 text-xs md:text-sm">분위기</p>
-            <p className="font-bold text-primary capitalize text-sm md:text-base">{currentTrack.mood || '-'}</p>
+            <p className="font-bold text-primary capitalize text-sm md:text-base">
+              {currentTrack.mood || "-"}
+            </p>
           </div>
           {currentTrack.reason && (
             <div className="col-span-2">
-              <p className="text-secondary mb-1 text-xs md:text-sm">추천 이유</p>
-              <p className="font-medium text-primary text-xs md:text-sm">{currentTrack.reason}</p>
+              <p className="text-secondary mb-1 text-xs md:text-sm">
+                추천 이유
+              </p>
+              <p className="font-medium text-primary text-xs md:text-sm">
+                {currentTrack.reason}
+              </p>
             </div>
           )}
         </div>

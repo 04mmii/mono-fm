@@ -4,22 +4,6 @@ import { Play, Pause, SkipBack, SkipForward, Shuffle, Repeat, Share2 } from 'luc
 import { usePlayerStore } from '@/stores/playerStore';
 import { motion } from 'framer-motion';
 
-// 무드별 색상
-const moodColors: Record<string, { main: string; glow: string }> = {
-  calm: { main: '#6366f1', glow: 'rgba(99, 102, 241, 0.5)' },
-  energetic: { main: '#f59e0b', glow: 'rgba(245, 158, 11, 0.5)' },
-  melancholy: { main: '#3b82f6', glow: 'rgba(59, 130, 246, 0.5)' },
-  romantic: { main: '#ec4899', glow: 'rgba(236, 72, 153, 0.5)' },
-  dark: { main: '#6b7280', glow: 'rgba(107, 114, 128, 0.5)' },
-  uplifting: { main: '#10b981', glow: 'rgba(16, 185, 129, 0.5)' },
-};
-
-const formatTime = (seconds: number): string => {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-};
-
 export default function Controls() {
   const {
     isPlaying,
@@ -30,62 +14,10 @@ export default function Controls() {
     isRepeat,
     toggleShuffle,
     toggleRepeat,
-    currentTime,
-    duration,
-    currentMood,
-    setCurrentTime,
   } = usePlayerStore();
 
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
-  const colors = moodColors[currentMood] || moodColors.calm;
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = x / rect.width;
-    setCurrentTime(percentage * duration);
-  };
-
   return (
-    <div className="w-full max-w-md mx-auto">
-      {/* Progress Bar */}
-      <div className="mb-4 px-2">
-        {/* Time Display */}
-        <div className="flex justify-between text-xs font-medium mb-2">
-          <span className="text-primary">{formatTime(currentTime)}</span>
-          <span className="text-secondary">{formatTime(duration)}</span>
-        </div>
-
-        {/* Seek Bar */}
-        <div
-          className="relative h-2 bg-gray-200 rounded-full cursor-pointer group"
-          onClick={handleSeek}
-        >
-          {/* Progress */}
-          <motion.div
-            className="absolute top-0 left-0 h-full rounded-full"
-            style={{
-              width: `${progress}%`,
-              background: `linear-gradient(90deg, ${colors.main}, ${colors.main}cc)`,
-              boxShadow: `0 0 10px ${colors.glow}`,
-            }}
-            transition={{ duration: 0.1 }}
-          />
-
-          {/* Thumb */}
-          <motion.div
-            className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-            style={{
-              left: `calc(${progress}% - 8px)`,
-              background: colors.main,
-              boxShadow: `0 0 10px ${colors.glow}, 0 2px 5px rgba(0,0,0,0.3)`,
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Control Buttons */}
-      <div className="flex items-center justify-center gap-2 md:gap-4">
+    <div className="flex items-center justify-center gap-2 md:gap-4">
       {/* Share - Hidden on mobile */}
       <button
         className="hidden md:flex w-10 h-10 rounded-full items-center justify-center text-secondary hover:bg-gray-100 transition-colors"
