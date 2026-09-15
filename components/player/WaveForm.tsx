@@ -8,12 +8,6 @@ const generateWaveform = (length: number): number[] => {
   return Array.from({ length }, () => Math.random() * 0.6 + 0.4);
 };
 
-const formatTime = (seconds: number): string => {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
-};
-
 // 무드별 색상
 const moodColors: Record<
   string,

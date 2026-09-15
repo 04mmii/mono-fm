@@ -84,7 +84,6 @@ export default function Controls() {
       >
         <Repeat size={16} className="md:w-[18px] md:h-[18px]" />
       </button>
-      </div>
     </div>
   );
 }

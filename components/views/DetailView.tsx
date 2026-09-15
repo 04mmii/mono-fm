@@ -18,7 +18,6 @@ import { moodTheme } from "@/constants/theme";
 import Turntable from "@/components/player/Turntable";
 import NowPlaying from "@/components/player/NowPlaying";
 import WaveForm from "@/components/player/WaveForm";
-import Controls from "@/components/player/Controls";
 
 export default function DetailView() {
   const { currentTrack, currentMood } = usePlayerStore();
